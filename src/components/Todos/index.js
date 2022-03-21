@@ -7,8 +7,8 @@ export default function Todos() {
 	const [listItem, setListItem] = useState('');
 	const [disabled, setDisabled] = useState(true);
 	const dispatch = useDispatch();
-	const lists = useSelector(state => state.list)
-
+	const lists = useSelector(state => state.todos.list)
+	console.log(lists)
 	const addList = () => {
 		dispatch(addTodos(listItem))
 		setListItem('');
@@ -17,6 +17,7 @@ export default function Todos() {
 		setListItem(e.target.value);
 		setDisabled(false)
 	}
+
 	return (
 		<div className='todos'>
 			<h2>TODOS</h2>

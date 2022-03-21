@@ -2,6 +2,7 @@
 import Todos from './components/Todos';
 import store from './store/index';
 import { Provider } from 'react-redux';
+import Api from './components/Api';
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <div className="App">
         <Todos />
       </div>
+      <Api />
     </Provider>
 
   );

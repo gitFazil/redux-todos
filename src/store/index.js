@@ -1,7 +1,8 @@
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { ADD_TODOS, CLEAR_TODOS, REMOVE_TODOS } from '../components/Todos/Constant'
 import { watchAddTodos } from './saga';
+import userReducer from '../reducers/userReducer';
 
 const sagaMiddleware = createSagaMiddleware()
 let initialState = {
@@ -44,8 +45,9 @@ const todosReducer = (state = initialState, action) => {
 			return state;
 	}
 }
+const rootReducer = combineReducers({ todos: todosReducer, post: userReducer })
 const enhancer = compose(applyMiddleware(sagaMiddleware), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
-const store = createStore(todosReducer, enhancer);
+const store = createStore(rootReducer, enhancer);
 sagaMiddleware.run(watchAddTodos);
 export default store;
